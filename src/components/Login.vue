@@ -17,7 +17,7 @@
 <a class="navbar-brand" href="/">Home</a>
 <div id="ftco-nav">
 <ul class="navbar-nav ml-auto">
-<li class="nav-item cta"><a href="contact.html" class="nav-link"><span @click="logout" v-if="auth">Logout</span></a></li>
+<li class="nav-item cta"><a class="nav-link"><span @click="logout" v-if="auth">Logout</span></a></li>
 </ul>
 </div>
 </div>
@@ -32,9 +32,9 @@
                      <input v-model="emailLogin" type="email" class="form-control" placeholder="Email" required>
                      <input v-model="passwordLogin" type="password" class="form-control" placeholder="Password" required>
                      <button class="btn btn-primary" @click="doLogin">Login</button>
-                     <p>Don't have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign up here</a>
+                     <p class="ifaccount"><span>Don't have an account?</span> <a @click="registerActive = !registerActive, emptyFields = false">Sign up here</a>
                      </p>
-                     <p><a href="#">Forgot your password?</a></p>
+                     <p><a>Forgot your password?</a></p>
                   </form>
                  
                </div>
@@ -58,9 +58,10 @@
                      <input v-model="confirmCode" type="text" class="form-control" placeholder="Confirmation code" required>
                      
                      </div>
-                     <div v-if="emailPhone"><button class="btn btn-primary" @click="doRegister">Create account</button></div>
-                      <div v-else><button class="btn btn-primary" @click="verifyotp">Create account..</button></div>  
-                       <p>Already have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign in here</a>
+                    <button v-if="emailPhone" class="btn btn-primary" @click="doRegister">Create account</button>
+                      <button v-else class="btn btn-primary" @click="verifyotp">Create account..</button>  
+                      <!-- <button class="btn btn-primary" @click="emailPhone?doRegister:verifyotp">Create account</button>-->
+                       <p class="ifaccount"><span>Already have an account? </span> <a @click="registerActive = !registerActive, emptyFields = false">Sign in here</a>
                      </p>
                   </form>
                    <div class="text-center social-btn">
@@ -87,19 +88,14 @@
   import {firebase} from '../firestore'
 
 
-//console.log(db);
+
 var firebaseAuth=firebase.auth(firebase.apps[0]);
-//var myFormLog = document.getElementById("myFormLog"),
-//myFormReg = document.getElementById("myFormReg");
+
    export default {
       name: "Login",
    
    data: function() {
-/*var num,str=this.$route.path.substring(this.$route.path.lastIndexOf("/app2")+6);//console.log(num);
-      if(typeof (num=Number(str))=="number")
-      firebaseAuth=firebase.auth(firebase.apps[num-1]);
-      else
-       firebaseAuth=firebase.auth(firebase.apps[0]);  */
+
      
 return {
       registerActive: false,
@@ -179,7 +175,8 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
   
                  }
 , 
-   loginphone(){
+   loginphone(e){
+         e.preventDefault();
       if(this.phoneReg.trim()=="")
          return;
     //console.log("click: ",window.recaptchaVerifier);
@@ -200,9 +197,8 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
         }
         });
 }
-        var cverify=window.recaptchaVerifier;
-//console.log(cverify);
-        firebase.auth().signInWithPhoneNumber(this.phoneReg,cverify).then(function(response){
+        
+        firebase.auth().signInWithPhoneNumber(this.phoneReg,window.recaptchaVerifier).then(function(response){
           alert("The a verification code will be sent to your phone number via text message.")
             //console.log(response);
             window.confirmationResult=response;
@@ -210,20 +206,23 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
             //console.log(error);
         })
    },
-   verifyotp(){
+   verifyotp(e){
+         e.preventDefault();
+         if(window.confirmationResult)
        window.confirmationResult.confirm(this.confirmCode).then(function(response){
-           alert(response);
+           console.log(response);
             var userobj=response.user;
             var token=userobj.xa;
           //  var provider="phone";
            // var email=this.phoneReg;
             if(token!=null && token!=undefined && token!=""){
+              console.log('+++++')
           //  sendDatatoServerPhp(email,provider,token,email);
             }
        })
        .catch(function(error){
          this.solved=false;
-           alert(error);
+           console.log(error);
        })
    }
      
@@ -314,6 +313,23 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
 a {
     color: #29fb03;
  }
+ p.ifaccount a {
+    background: cornflowerblue;
+    padding: 5px 20px;
+    margin: 4px;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+   }
+p.ifaccount {
+    font-size: 1.1rem;
+    margin: 10px;
+}
+p.ifaccount * {
+  white-space: pre;
+ 
+}
  span.orPhoneEmail{
    color: blanchedalmond;
     font-weight: 700;
