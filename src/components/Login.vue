@@ -17,7 +17,7 @@
 <a class="navbar-brand" href="/">Home</a>
 <div id="ftco-nav">
 <ul class="navbar-nav ml-auto">
-<li class="nav-item cta"><a class="nav-link"><span @click="logout" v-if="auth">Logout</span></a></li>
+<li class="nav-item cta"><a class="nav-link"><span @click="logout" v-if="auth" style="cursor: pointer;">Logout</span></a></li>
 </ul>
 </div>
 </div>
@@ -120,12 +120,13 @@ return {
    {
       loginWithFacebook() {
       const provider = new firebase.auth.FacebookAuthProvider();
+       provider.addScope('email');
       firebase
         .auth()
         .signInWithPopup(provider)
         .then(() => {
-          alert("homeFace");
-          //this.$router.go("/");
+         // console.log("homeFace",provider);
+          this.$router.go("/");
         })
         .catch(err => {
           // TODO:
@@ -136,12 +137,13 @@ return {
       loginWithGoogle() {
        
       const provider = new firebase.auth.GoogleAuthProvider();
+       provider.addScope('email');
       firebase
         .auth()
         .signInWithPopup(provider)
         .then(() => {
-          alert("homeGoogle");
-          //this.$router.go("/");
+         //console.log("homeGoogle",provider);
+          this.$router.go("/");
         })
         .catch(err => {
           // TODO:
@@ -210,19 +212,20 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
          e.preventDefault();
          if(window.confirmationResult)
        window.confirmationResult.confirm(this.confirmCode).then(function(response){
-           console.log(response);
+           //console.log(response);
             var userobj=response.user;
             var token=userobj.xa;
           //  var provider="phone";
            // var email=this.phoneReg;
+           this.$router.go("/");
             if(token!=null && token!=undefined && token!=""){
-              console.log('+++++')
+              //console.log('+++++')
           //  sendDatatoServerPhp(email,provider,token,email);
             }
        })
-       .catch(function(error){
+       .catch(function(/*error*/){
          this.solved=false;
-           console.log(error);
+           //console.log(error);
        })
    }
      
