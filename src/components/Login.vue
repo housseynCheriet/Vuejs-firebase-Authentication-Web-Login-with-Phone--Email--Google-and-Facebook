@@ -51,7 +51,7 @@
                      <input v-model="confirmReg" type="password" class="form-control" placeholder="Confirm Password" required>
                      </div>
                      <div v-else>
-                     <span class="orPhoneEmail" @click="emailPhone = !emailPhone,solved=false;">Or Email</span>
+                     <span class="orPhoneEmail" @click="emailPhone = !emailPhone,this.solved=false;">Or Email</span>
                      <input v-model="phoneReg" type="text" class="form-control" placeholder="Phone number" required>
                      <div id="recaptcha-container"></div>
                      <span class="orPhoneEmail submitCode" @click="loginphone">Submit code</span>
