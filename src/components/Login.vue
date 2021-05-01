@@ -201,7 +201,7 @@ this.$store.dispatch('signUserIn', {email: this.emailLogin, password: this.passw
 }
         
         firebase.auth().signInWithPhoneNumber(this.phoneReg,window.recaptchaVerifier).then(function(response){
-          alert("The a verification code will be sent to your phone number via text message.")
+          alert("The verification code will be sent to your phone number via text message.")
             //console.log(response);
             window.confirmationResult=response;
         }).catch(function(/*error*/){
