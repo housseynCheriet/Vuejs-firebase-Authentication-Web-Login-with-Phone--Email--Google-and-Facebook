@@ -1,3 +1,11 @@
+# DEMO
+
+[https://vuejs-firebase-web-login-with-phone-email-google-and-klwo4n9bu.vercel.app/login](https://vuejs-firebase-web-login-with-phone-email-google-and-klwo4n9bu.vercel.app/login)
+
+[https://www.youtube.com/watch?v=I4Sllo39Lkg](https://www.youtube.com/watch?v=I4Sllo39Lkg)
+
+
+
 # client
 
 ## Project setup
