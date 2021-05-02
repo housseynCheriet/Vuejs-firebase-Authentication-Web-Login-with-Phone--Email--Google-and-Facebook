@@ -9,13 +9,6 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-
-
-///////console.log(global);
-/*global.jQuery = require('jquery');
-var jQuery = global.jQuery;
-window.jQuery = jQuery;*/
-
 import {firebase} from './firestore'
 
 
@@ -30,15 +23,9 @@ Vue.config.productionTip = false
 
 
 let app = '';
-//console.log(router.history._startLocation)
-//console.log(firebase);
-/*router.beforeEach((to, from, next) => {
-console.log(to,from,next);
-next();
- 
-})*/
 
-firebase.auth(firebase.apps[3]).onAuthStateChanged(user => { console.log('****00: ',user);
+
+firebase.auth(firebase.apps[3]).onAuthStateChanged(user => { //console.log('****00: ',user);
 if(!app){
     console.log(user);
     app = new Vue({

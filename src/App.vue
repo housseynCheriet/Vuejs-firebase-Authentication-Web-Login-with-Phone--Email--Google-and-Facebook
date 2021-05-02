@@ -13,15 +13,7 @@
     name: 'app',
     components: {
       GetInTouch
-    }   ,
-    methods:{
-      floatingBtn(){
-        document.querySelector('.social-panel-container').classList.toggle('visible')
-      },
-       closeBtn(){
-         document.querySelector('.social-panel-container').classList.remove('visible')
-      }
-    }
+    }  
    
      
   }

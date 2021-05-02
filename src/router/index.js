@@ -27,36 +27,10 @@ export default new VueRouter({
    {
       path: '*',
       redirect: '/'
-   },/*{
-      path: '*',
-      redirect: '/login'
    },{
-      path: '/',
-      name: 'Home',
-      component: Home
-   },{
-      path: '/login',
-      name: 'login',
-      component: Login
-   },{
-      path: '/register',
-      name: 'registe',
-      component: Register
-   },{
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard,
-      meta: {
-         requiresAuth: true
-      }
-   },*/{
       path: '/hahahaahaahaaha',
    children: rouutes
    }
-
-
-
-
    /*,
    {
       //path: '/app2/:uid',
